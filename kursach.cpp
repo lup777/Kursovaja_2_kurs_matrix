@@ -69,10 +69,10 @@ int main()
   display_matrix(matrix, matrix_size);
 
   sort_matrix2(matrix, matrix_size);
-  //display_matrix(matrix, matrix_size);
+  display_matrix(matrix, matrix_size);
   
   clean_romb(matrix, matrix_h_size);
-  display_matrix(matrix, matrix_size);
+  //display_matrix(matrix, matrix_size);
   
   for(int i = 0; i < matrix_size; i++)
     {
@@ -268,18 +268,31 @@ void sort_matrix2(int**& matrix, size_t size)
     
     if( (size % 2) != 0 ) //если матрица не чётная
       {
-	// СОРТИРУЕМ ВЕРХНИЙ ПРАВЫЙ УГОЛ МАТРИЦЫ
+	// СОРТИРУЕМ ВЕРХНЮЮ ПОЛОВИНУ
 	for (int line = 0; line < center; line ++) // выбираем последовательно строки матрицы для сортировки
 	  {
 	    int flag = 1;
 	    while(flag != 0) // сортируем текущую строку пока не отсортируем её полностью
 	      {
 		flag = 0; // пока ни одной пары элементов не поменяли местами
+		// СОРТИРУЕМ ПРАВЫЙ ВЕРХНИЙ УГОЛ
 		for (int column = size - 1; column - 1 > center + line; column --) // один проход по всеё строке пока
 		  {
-		    printf("line = %d, column = %d \n", line, column);
 		    if (matrix[line][column] < matrix[line][column - 1]) // сортируем 2 текущих елемента
 		      {
+			printf("line = %d, column = %d \n", line, column);
+			int tmp = matrix[line][column - 1];
+			matrix[line][column - 1] = matrix[line][column];
+			matrix[line][column] = tmp;
+			flag = 1;  // поменяли местами пару элементов, значит надо будет ещё раз проётись по этой строке
+		      } // if
+		  }// for
+		// СОРТИРУЕМ ЛЕВЫЙ ВЕРХНИЙ УГОЛ
+		for (int column = center - line - 1; column - 1 >= 0; column --) // один проход по всеё строке пока
+		  {
+		    if (matrix[line][column] < matrix[line][column - 1]) // сортируем 2 текущих елемента
+		      {
+			printf("line = %d, column = %d \n", line, column);
 			int tmp = matrix[line][column - 1];
 			matrix[line][column - 1] = matrix[line][column];
 			matrix[line][column] = tmp;
@@ -289,18 +302,31 @@ void sort_matrix2(int**& matrix, size_t size)
 	      } // while(flag ....
 	  } // for (int line = 0.....
 	
-	// СОРТИРУЕМ НИЖНИЙ ПРАВЫЙ УГОЛ МАТРИЦЫ
+	// СОРТИРУЕМ НИЖНЮЮ ПОЛОВИНУ
 	for (int line = center; line < size; line ++)
 	  {
 	    int flag = 1;
 	    while(flag != 0) // сортируем текущую строку пока не отсортируем её полностью
 	      {
 		flag = 0; // пока ни одной пары элементов не поменяли местами
+		// СОРТИРУЕМ ПРАВЫЙ НИЖНИЙ УГОЛ
 		for (int column = size - 1; column - 1 > (center - 1) + (size - line); column --)
 		  {
-		    printf("line = %d, column = %d \n", line, column);
 		    if (matrix[line][column] < matrix[line][column - 1])
 		      {
+			//printf("line = %d, column = %d \n", line, column);
+			int tmp = matrix[line][column - 1];
+			matrix[line][column - 1] = matrix[line][column];
+			matrix[line][column] = tmp;
+			flag = 1;
+		      }
+		  }
+		// СОРТИРУЕМ ЛЕВЫЙ НИЖНИЙ УГОЛ
+		for (int column = center - (size - line); column - 1 >= 0; column --)
+		  {
+		    if (matrix[line][column] > matrix[line][column - 1])
+		      {
+			//printf("line = %d, column = %d \n", line, column);								
 			int tmp = matrix[line][column - 1];
 			matrix[line][column - 1] = matrix[line][column];
 			matrix[line][column] = tmp;
