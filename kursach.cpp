@@ -223,38 +223,7 @@ void sort_matrix2(int**& matrix, size_t size)
 }
 
 void clean_romb(int**& matrix, size_t /*matrix_h_*/size)
-{/*
-  int center = matrix_h_size/2;
-  int c = center;
-  int v_index, h_index;
-  
-  if (matrix_h_size%2 == 0)
-    {
-      for(v_index = 0; v_index < matrix_h_size + 1; ++v_index)
-	
-	for(h_index = v_index; h_index < matrix_h_size - v_index; ++h_index)
-	  {
-	    matrix[(matrix_h_size/2) - v_index - 1][h_index] = 0;
-	    matrix[v_index + (matrix_h_size/2)][h_index] = 0;
-	  }
-    }
-  else
-    for (v_index = 0; v_index < matrix_h_size; ++v_index)
-      {
-	for (h_index = center; h_index < c+1; ++h_index)
-	  matrix[v_index][h_index] = 0;
-	
-	if ((c < matrix_h_size-1) && (v_index < matrix_h_size/2))
-	  {
-	    ++c;
-	    --center;
-	  }
-	else
-	  {
-	    --c;
-	    ++center;
-	  }
-	  }*/
+{
   int center = size / 2;
 
   // ОЧИЩАЕМ ВЕРХНЮЮ ПОЛОВИНУ
