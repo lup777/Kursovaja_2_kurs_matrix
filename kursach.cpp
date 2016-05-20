@@ -39,6 +39,12 @@ int main()
       return FAILED;
     }
 
+  if((matrix_size % 2) != 0)
+    {
+      cout<<"matrix should be even"<<endl;
+      return FAILED;
+    }
+  
   if(matrix_size < 5)
     {
       cout<<"matrix is too small"<<endl;
@@ -72,7 +78,7 @@ int main()
   display_matrix(matrix, matrix_size);
   
   clean_romb(matrix, matrix_h_size);
-  //display_matrix(matrix, matrix_size);
+  display_matrix(matrix, matrix_size);
   
   for(int i = 0; i < matrix_size; i++)
     {
@@ -124,130 +130,7 @@ void fill_matrix_with_random_value(int**& matrix, size_t size)
 	}
     }
 }
-/*
-void sort_matrix2(int**& matrix, size_t size)
-{
-  int line; //индекс по горизонтали
-  int column; // индекс по вертикали
-  int prev; //индекс перед column
-  int next; // индекс следующий за prev
-  int center = size / 2;
-  int center_shift;
-  int flag = 0;;
 
-  
-  if((size % 2) != 0)
-    {
-      cout << "odd matrix" << endl;
-      cout << "center = " << center << endl;
-    }
-  else
-    {
-      center --;
-      cout << "even matrix" << endl;
-      cout << "center = " << center << " " << center + 1 << endl;
-    }
-
-  if((size % 2) != 0) //если не чётная матрица
-    {
-      for(line = 0; line < size; line ++)
-	{
-	  flag = 1;
-
-	  if(line >= center) // если уже прошли середину матрицы по вертикали - то половина ширины ромба в этой строке есть ширина матрицы - номер строки
-	    center_shift = size - line - 1;
-	  else // если еще не прошли середину матрицы по вертикали, то половина ширины ромба в этой строке есть номер строки.
-	    center_shift = line;
-	
-	  while(flag != 0) // пока не отсортируем всю строку
-	    {
-	      flag = 0;
-	      prev = size - 2;
-		  
-	      for(column = size - 1; // начнём с конца строки
-		  prev > 0; // идём от конца до начала
-		  column --) // один проход сортировки по всей строке
-		{
-
-		  next = column;
-		  prev = column - 1;
-		  		  
-		  if( prev == center + center_shift ) // если prev указывает на  правую грань ромба
-		    {
-		      prev = center - center_shift - 1; // перешагиваем его (точка перед левой гранью ромба)
-		      //next = prev; // а эта точка следующая сразу за правой гранью ромба
-		      column = center - center_shift; // на левой грани куба (в конце итерации из него вычтется 1)
-		    }
-		  else if( (prev < center + center_shift) &&
-			   (prev >= center - center_shift))
-		    { //это если сходу попали внуть ромба, т.е. мы в середине ромба
-		      flag = 0;
-		      break;
-		    }
-		  
-		  //cout << "matrix[" << line << "][" << column << "]" << endl;
-		  if( matrix[line][prev] < matrix[line][next] )
-		    {
-		      int tmp = matrix[line][prev];
-		      matrix[line][prev] = matrix[line][next];
-		      matrix[line][next] = tmp;
-		      flag = 1;
-		    }
-		}
-	    }
-	}
-    }
-  else //чётная матрица 
-    {
-      for(line = 0; line < size; line ++)
-	{
-	  flag = 1;
-
-	  if(line >= center) // если уже прошли середину матрицы по вертикали - то половина его ширины в этой строке есть ширина матрицы - номер строки
-	    center_shift = size - line - 1;
-	  else // если еще не прошли середину матрицы по вертикали, то половина ширины ромба в этой строке есть номер строки.
-	    center_shift = line;
-   
-	  while(flag != 0) // делаем проходы сортировки пока не отсортируем всю строку
-	    {
-	      flag = 0;
-	      prev = size - 2; // -2 = ( -1 индекс массива с нуля) + (-1 предыдущй индекс)
-		  
-	      for(column = size - 1; // начнём с конца строки
-		  prev > 0; // идём от конца до начала
-		  column --) // один проход сортировки по всей строке
-		{
-
-		  next = column;
-		  prev = column - 1;
-		  		  
-		  if( prev == center + center_shift + 1 ) // если prev указывает на  правую грань ромба
-		    {
-		      prev = center - center_shift - 1; // перешагиваем его (точка перед левой гранью ромба)
-		      //next = prev; // а эта точка следующая сразу за правой гранью ромба
-		      column = center - center_shift; // на левой грани куба (в конце итерации из него вычтется 1)
-		    }
-		  else if( (prev < center + center_shift + 1) &&
-			   (prev >= center - center_shift) )
-		    {
-		      flag = 0;
-		      break;
-		    }
-
-		  if( matrix[line][prev] < matrix[line][next] )
-		    {
-		      int tmp = matrix[line][prev];
-		      matrix[line][prev] = matrix[line][next];
-		      matrix[line][next] = tmp;
-		      flag = 1;
-		    }
-		}
-	    }
-	}
-    }
-}
-
-*/
 void sort_matrix2(int**& matrix, size_t size)
 {
   int center = size / 2;
@@ -256,17 +139,18 @@ void sort_matrix2(int**& matrix, size_t size)
     if((size % 2) != 0)
     {
       cout << "odd matrix" << endl;
-      cout << "center = " << center << endl;
+      cout << "Please, choose even matrix size "<< endl;
+      return;
     }
   else
     {
       center --;
       cout << "even matrix" << endl;
-      cout << "center = " << center << " " << center + 1 << endl;
+      //cout << "center = " << center << " " << center + 1 << endl;
     }
 
     
-    if( (size % 2) != 0 ) //если матрица не чётная
+    if( (size % 2) == 0 ) //если матрица чётная
       {
 	// СОРТИРУЕМ ВЕРХНЮЮ ПОЛОВИНУ
 	for (int line = 0; line < center; line ++) // выбираем последовательно строки матрицы для сортировки
@@ -280,7 +164,7 @@ void sort_matrix2(int**& matrix, size_t size)
 		  {
 		    if (matrix[line][column] < matrix[line][column - 1]) // сортируем 2 текущих елемента
 		      {
-			printf("line = %d, column = %d \n", line, column);
+			//printf("line = %d, column = %d \n", line, column);
 			int tmp = matrix[line][column - 1];
 			matrix[line][column - 1] = matrix[line][column];
 			matrix[line][column] = tmp;
@@ -288,11 +172,11 @@ void sort_matrix2(int**& matrix, size_t size)
 		      } // if
 		  }// for
 		// СОРТИРУЕМ ЛЕВЫЙ ВЕРХНИЙ УГОЛ
-		for (int column = center - line - 1; column - 1 >= 0; column --) // один проход по всеё строке пока
+		for (int column = center - line; column - 1 >= 0; column --) // один проход по всеё строке пока
 		  {
-		    if (matrix[line][column] < matrix[line][column - 1]) // сортируем 2 текущих елемента
+		    if (matrix[line][column - 1] < matrix[line][column]) // сортируем 2 текущих елемента
 		      {
-			printf("line = %d, column = %d \n", line, column);
+			//printf("line = %d, column = %d \n", line, column);
 			int tmp = matrix[line][column - 1];
 			matrix[line][column - 1] = matrix[line][column];
 			matrix[line][column] = tmp;
@@ -322,9 +206,9 @@ void sort_matrix2(int**& matrix, size_t size)
 		      }
 		  }
 		// СОРТИРУЕМ ЛЕВЫЙ НИЖНИЙ УГОЛ
-		for (int column = center - (size - line); column - 1 >= 0; column --)
+		for (int column = center - (size - line) + 1; column - 1 >= 0; column --)
 		  {
-		    if (matrix[line][column] > matrix[line][column - 1])
+		    if (matrix[line][column - 1] < matrix[line][column])
 		      {
 			//printf("line = %d, column = %d \n", line, column);								
 			int tmp = matrix[line][column - 1];
@@ -335,33 +219,11 @@ void sort_matrix2(int**& matrix, size_t size)
 		  }
 	      }
 	  }
-	/*
-	// СОРТИРУЕМ ВЕРХНИЙ ЛЕВЫЙ УГОЛ МАТРИЦЫ
-	for (int line = 0; line < center; line ++) // выбираем последовательно строки матрицы для сортировки
-	  {
-	    int flag = 1;
-	    while(flag != 0) // сортируем текущую строку пока не отсортируем её полностью
-	      {
-		flag = 0; // пока ни одной пары элементов не поменяли местами
-		for (int column = size - 1; column - 1 > center + line; column --) // один проход по всеё строке пока
-		  {
-		    printf("line = %d, column = %d \n", line, column);
-		    if (matrix[line][column] < matrix[line][column - 1]) // сортируем 2 текущих елемента
-		      {
-			int tmp = matrix[line][column - 1];
-			matrix[line][column - 1] = matrix[line][column];
-			matrix[line][column] = tmp;
-			flag = 1;  // поменяли местами пару элементов, значит надо будет ещё раз проётись по этой строке
-		      } // if
-		  }// for
-	      } // while(flag ....
-	  } // for (int line = 0.....
-	*/
-      }   
+     }   
 }
 
-void clean_romb(int**& matrix, size_t matrix_h_size)
-{
+void clean_romb(int**& matrix, size_t /*matrix_h_*/size)
+{/*
   int center = matrix_h_size/2;
   int c = center;
   int v_index, h_index;
@@ -392,5 +254,23 @@ void clean_romb(int**& matrix, size_t matrix_h_size)
 	    --c;
 	    ++center;
 	  }
-      }
+	  }*/
+  int center = size / 2;
+
+  // ОЧИЩАЕМ ВЕРХНЮЮ ПОЛОВИНУ
+  for (int line = 0; line < center; line ++)
+    {
+      for (int column = center - line; column < center + line; column ++)
+	{
+	  matrix[line][column] = 0;
+	}
+    }
+  //ОЧИЩАЕМ НИЖНЮЮ ПОЛОВИНУ
+  for (int line = center; line < size; line ++)
+    {
+      for (int column = center - (size - line) + 1; column < center + (size - line) - 1; column ++)
+	{
+	  matrix[line][column] = 0;
+	}
+    }
 }
